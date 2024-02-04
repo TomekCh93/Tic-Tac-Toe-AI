@@ -4,12 +4,9 @@ using System.Threading;
 
 namespace Tic_Tac_Toe
 {
-
-
     public class Player
     {
         private char _letter;
-
         public char Letter
         {
             get
@@ -22,7 +19,6 @@ namespace Tic_Tac_Toe
                 _letter = value;
             }
         }
-
 
         public Player(char letter)
         {
@@ -37,23 +33,17 @@ namespace Tic_Tac_Toe
             var colParse = 0;
             while (!CheckUserInput(userInput, out rowParse, out colParse))
             {
-
                 Console.WriteLine("You specified the wrong value. Specify the row number first then the column.");
                 userInput = Console.ReadLine();
             }
-
             Game.FillWithMove((rowParse, colParse), this.Letter);
             return;
-
-
         }
 
         private bool CheckUserInput(string userInput, out int rowParse, out int colParse)
         {
-
             try
             {
-
                 rowParse = int.Parse(userInput[0].ToString());
                 colParse = int.Parse(userInput[1].ToString());
 
@@ -68,27 +58,19 @@ namespace Tic_Tac_Toe
                 rowParse = colParse = 0;
                 return false;
             }
-
-
             return Game.CheckIfFieldNotOccupied((rowParse, colParse));
         }
-
-
     }
 
     public class HumanPlayer : Player
     {
-
         public HumanPlayer(char letter) : base(letter)
         {
         }
-
-
     }
 
     public class RandomComputerPlayer : Player
     {
-
         public RandomComputerPlayer(char letter) : base(letter)
         {
         }
@@ -112,16 +94,13 @@ namespace Tic_Tac_Toe
 
     public class SmartComputerPlayer : Player
     {
-
         public SmartComputerPlayer(char letter) : base(letter)
         {
         }
 
         public override void GetMove()
         {
-
             var bestScore = int.MinValue;
-
             (int, int) bestMove = (0, 0);
 
             for (int i = 0; i < 3; i++)
@@ -133,7 +112,7 @@ namespace Tic_Tac_Toe
 
                         Global.board[i, j] = this.Letter;
                         Global.moves++;
-                        int score = Minimax(true, 0); // start with maximizing
+                        int score = Minimax(true, 0);
                         Global.board[i, j] = ' ';
                         Global.moves--;
                         if (score > bestScore)
@@ -145,15 +124,7 @@ namespace Tic_Tac_Toe
                     }
                 }
             }
-            //if (!Game.CheckIfFieldNotOccupied((bestMove.Item1+1, bestMove.Item2+1)))
-            //{
-            //    Console.WriteLine("We encountered an issue!");
-
-            //    Thread.Sleep(133000);
-            //}
-
             Game.FillWithMove((bestMove.Item1 + 1, bestMove.Item2 + 1), this.Letter);
-
             return;
         }
 
@@ -194,13 +165,10 @@ namespace Tic_Tac_Toe
                         Global.board[i, j] = ' ';
                         Global.moves--;
                         bestScore = maximizingMove ? Math.Min(score, bestScore) : Math.Max(score, bestScore);
-
                     }
                 }
             }
             return bestScore;
-
         }
     }
-
 }

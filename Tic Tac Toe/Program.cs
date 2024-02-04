@@ -20,30 +20,29 @@ namespace Tic_Tac_Toe
             {
                 while (gameStatus == ' ')
                 {
-                  
                     Game.DrawStats(turn);
-                   Game.Render();
+                    Game.Render();
                     turn = Game.MakeMove(turn, playerX, playerY);
                     Global.moves++;
                     gameStatus = Game.Evaluate();
-                    
                 }
+
                 if (gameStatus == 'X')
                 {
-                  Console.WriteLine(Game.PrintResults(gameStatus));
-                 Thread.Sleep(5000);
+                    Console.WriteLine(Game.PrintResults(gameStatus));
+                    Thread.Sleep(5000);
                     xWins++;
                 }
                 else if (gameStatus == 'O')
                 {
-                  Console.WriteLine(Game.PrintResults(gameStatus));
-                  Thread.Sleep(5000);
+                    Console.WriteLine(Game.PrintResults(gameStatus));
+                    Thread.Sleep(5000);
                     oWins++;
                 }
                 else
                 {
-                   Console.WriteLine(Game.PrintResults(gameStatus));
-                   Thread.Sleep(5000);
+                    Console.WriteLine(Game.PrintResults(gameStatus));
+                    Thread.Sleep(5000);
                     draws++;
                 }
 
@@ -51,17 +50,8 @@ namespace Tic_Tac_Toe
                 Global.board = Game.FillBoard();
                 gameStatus = ' ';
             }
-
-
-
             Console.WriteLine(Game.PrintResults(gameStatus));
             Console.WriteLine($"oWins : {oWins}, xWins : {xWins} , draws : {draws}");
         }
-
-
-
     }
 }
-
-
-
